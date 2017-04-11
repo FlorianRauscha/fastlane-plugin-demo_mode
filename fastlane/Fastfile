@@ -1,0 +1,19 @@
+lane :test do
+  demo_mode(
+    clock: "0800",
+    wifi: true,
+    wifi_level: 4,
+    mobile: true,
+    mobile_level: 4,
+    plugged: false,
+    battery: 100,
+    notifications: false)
+end
+
+lane :simple do
+  demo_mode()
+end
+
+lane :deactivate do
+  demo_mode(deactivate: true)
+end
