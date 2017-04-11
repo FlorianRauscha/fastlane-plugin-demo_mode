@@ -7,10 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-demo_mode'
   spec.version       = Fastlane::DemoMode::VERSION
   spec.author        = %q{Florian Rauscha}
-  spec.email         = %q{florian.rauscha@gmail.com}
 
-  spec.summary       = %q{Sets your device to demo mode}
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-demo_mode"
+  spec.summary       = %q{sets your connected android devices to demo mode}
+  # spec.homepage      = "https://github.com/FlorianRauscha/fastlane-plugin-demo_mode"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
@@ -19,8 +18,6 @@ Gem::Specification.new do |spec|
 
   # Don't add a dependency to fastlane or fastlane_re
   # since this would cause a circular dependency
-
-  # spec.add_dependency 'your-dependency', '~> 1.0.0'
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'bundler'
