@@ -1,4 +1,4 @@
-# demo_mode plugin
+# Fastlane Plugin: demo_mode
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-demo_mode)
 
@@ -12,15 +12,35 @@ fastlane add_plugin demo_mode
 
 ## About demo_mode
 
-Sets your device to demo mode
+This fastlane plugin sets your connected android devices to demo mode.
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+![Comparison](img/comparison.png)
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
+You could run `demo_mode` before `screengrab` and deactivate it after `screengrab` has finished.
+
+```
+lane :test do
+
+  demo_mode(
+    clock: "0800",
+    wifi: true,
+    wifi_level: 4,
+    mobile: true,
+    mobile_level: 4,
+    plugged: false,
+    battery: 100,
+    notifications: false)
+
+  screengrab
+
+  demo_mode(deactivate: true)
+
+end
+```
 
 ## Run tests for this plugin
 
