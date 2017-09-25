@@ -3,25 +3,32 @@ module Fastlane
   module Actions
     class DemoModeAction < Action
       def self.run(config)
+        devices = Actions.sh("adb devices | tail -n +2 | cut -f1")
 
-        command = "adb shell am broadcast -a com.android.systemui.demo -e command "
-        showWifi = config[:wifi] ? "show" : "hide"
-        showMobile = config[:mobile] ? "show" : "hide"
+        for device in devices.each_line
+          device = device.strip
+          next if device.empty?
 
-        Actions.sh("adb shell settings put global sysui_demo_allowed 1")
+          UI.message("Set demo mode on " + device)
 
-        if config[:deactivate]
-          Actions.sh(command + "exit")
-        else
-          Actions.sh(command + "enter")
-          Actions.sh(command + "clock -e hhmm #{config[:clock]}")
-          Actions.sh(command + "battery -e level #{config[:battery]}")
-          Actions.sh(command + "battery -e plugged #{config[:plugged]}")
-          Actions.sh(command + "network -e wifi #{showWifi} -e level #{config[:wifi_level]}")
-          Actions.sh(command + "network -e mobile #{showMobile} -e datatype none -e level #{config[:mobile_level]}")
-          Actions.sh(command + "notifications -e visible #{config[:notifications]}")
+          command = "adb -s #{device} shell am broadcast -a com.android.systemui.demo -e command "
+          showWifi = config[:wifi] ? "show" : "hide"
+          showMobile = config[:mobile] ? "show" : "hide"
+
+          Actions.sh("adb -s #{device} shell settings put global sysui_demo_allowed 1")
+
+          if config[:deactivate]
+            Actions.sh(command + "exit")
+          else
+            Actions.sh(command + "enter")
+            Actions.sh(command + "clock -e hhmm #{config[:clock]}")
+            Actions.sh(command + "battery -e level #{config[:battery]}")
+            Actions.sh(command + "battery -e plugged #{config[:plugged]}")
+            Actions.sh(command + "network -e wifi #{showWifi} -e level #{config[:wifi_level]}")
+            Actions.sh(command + "network -e mobile #{showMobile} -e datatype none -e level #{config[:mobile_level]}")
+            Actions.sh(command + "notifications -e visible #{config[:notifications]}")
+          end
         end
-
       end
 
       def self.description
