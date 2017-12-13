@@ -4,6 +4,7 @@ lane :test do
     wifi: true,
     wifi_level: 4,
     mobile: true,
+    mobile_datatype: "e",
     mobile_level: 4,
     plugged: false,
     battery: 100,

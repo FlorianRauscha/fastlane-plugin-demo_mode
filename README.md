@@ -12,7 +12,7 @@ fastlane add_plugin demo_mode
 
 ## About demo_mode
 
-This fastlane plugin sets your connected android devices to demo mode.
+This fastlane plugin sets your connected android devices to demo mode. It allows you to manipulate the status bar to make nice and clear screenshots.
 
 ![Comparison](img/comparison.png)
 
@@ -30,6 +30,7 @@ lane :test do
     wifi: true,
     wifi_level: 4,
     mobile: true,
+    mobile_datatype: "lte",
     mobile_level: 4,
     plugged: false,
     battery: 100,
@@ -41,6 +42,18 @@ lane :test do
 
 end
 ```
+
+## Parameter Values
+**clock:** ["0000"-"2359"]  
+**wifi:** true | false  
+**wifi_level:** [0-4]  
+**mobile:** true | false  
+**mobile_datatype:** "1x" | "3g" | "4g" | "4g+" | "e" | "g" | "h" | "lte" | "lte+" | "roam"  
+**mobile_level:** [0-4]  
+**plugged:** true | false  
+**battery:** [0-100]  
+**notifications:** true | false  
+**deactivate:** true | false
 
 ## Run tests for this plugin
 

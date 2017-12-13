@@ -25,7 +25,7 @@ module Fastlane
             Actions.sh(command + "battery -e level #{config[:battery]}")
             Actions.sh(command + "battery -e plugged #{config[:plugged]}")
             Actions.sh(command + "network -e wifi #{showWifi} -e level #{config[:wifi_level]}")
-            Actions.sh(command + "network -e mobile #{showMobile} -e datatype none -e level #{config[:mobile_level]}")
+            Actions.sh(command + "network -e mobile #{showMobile} -e datatype #{config[:mobile_datatype]} -e level #{config[:mobile_level]}")
             Actions.sh(command + "notifications -e visible #{config[:notifications]}")
           end
         end
@@ -80,6 +80,13 @@ module Fastlane
             optional: true,
             is_string: false,
             default_value: false
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :mobile_datatype,
+            description: "Set mobile datatype (default: none)",
+            optional: true,
+            default_value: "none",
+            type: String
           ),
           FastlaneCore::ConfigItem.new(
             key: :mobile_level,
